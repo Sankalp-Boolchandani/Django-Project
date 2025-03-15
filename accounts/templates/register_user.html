@@ -18,79 +18,35 @@
     </div>
     {% endfor %}
     {% endif %}
-    <form method="POST" onsubmit="return validatePassword()">
+    <form method="POST">
       {% csrf_token %}
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">First Name</label>
-        <input type="text" class="form-control" name="first_name" aria-describedby="emailHelp">
+        <input type="text" class="form-control" name="first_name" required>
       </div>
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Last Name</label>
-        <input type="text" class="form-control" name="last_name" aria-describedby="emailHelp">
+        <input type="text" class="form-control" name="last_name" required>
       </div>
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Contact No</label>
-        <input type="text" class="form-control" name="contact" aria-describedby="emailHelp">
+        <input type="text" class="form-control" name="contact" id="contact" minlength="10" maxlength="10" required>
       </div>
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Email address</label>
-        <input type="email" class="form-control" name="email" aria-describedby="emailHelp">
+        <input type="email" class="form-control" name="email" required>
       </div>
       <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Password</label>
-        <input type="password" class="form-control" name="password">
+        <input type="password" class="form-control" name="password" id="password" required>
       </div>
       <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
-        <input type="password" class="form-control" name="confirm_password">
+        <input type="password" class="form-control" name="confirm_password" id="confirm_password" required>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>
-
-  <script>
-    function validatePassword() {
-        var password = document.getElementById("password").value;
-        var confirmPassword = document.getElementById("confirm_password").value;
-        
-        if (password !== confirmPassword) {
-            alert("Passwords do not match!");
-            return false;
-        }
-
-        if (password.length < 8 || password.length > 12) {
-            alert("Password must be between 8 and 12 characters.");
-            return false;
-        }
-
-        var uppercasePattern = /[A-Z]/;
-        if (!uppercasePattern.test(password)) {
-            alert("Password must contain at least one uppercase letter.");
-            return false;
-        }
-
-        var lowercasePattern = /[a-z]/;
-        if (!lowercasePattern.test(password)) {
-            alert("Password must contain at least one lowercase letter.");
-            return false;
-        }
-
-        var numberPattern = /[0-9]/;
-        if (!numberPattern.test(password)) {
-            alert("Password must contain at least one number.");
-            return false;
-        }
-
-        var specialCharPattern = /[!@#$%^&*(),.?":{}|<>]/;
-        if (!specialCharPattern.test(password)) {
-            alert("Password must contain at least one special character.");
-            return false;
-        }
-
-        return true;
-    }
-</script>
-
 
 </body>
 </html>

@@ -16,7 +16,12 @@ def register_user(request):
     email=data.get('email')
     password=data.get('password')
 
-    user=Employee.objects.create(
+    user=Employee.objects.filter(email=email)
+    if user.exists():
+      messages.error(request, "Email already exists.")
+      return redirect("/register_user")
+    else:
+      user=Employee.objects.create(
       first_name=first_name,
       last_name=last_name,
       contact=contact,

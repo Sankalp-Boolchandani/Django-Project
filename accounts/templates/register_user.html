@@ -13,7 +13,7 @@
     <hr>
     {% if messages %}
     {% for message in messages %}
-    <div class="alert alert-success" role="alert">
+    <div class="alert alert-primary" role="alert">
       {{ message }}
     </div>
     {% endfor %}
@@ -52,12 +52,19 @@
     document.getElementById("myForm").addEventListener("submit", function(event) {
         var password = document.getElementById("password").value;
         var confirmPassword = document.getElementById("confirm_password").value;
+        var contact = document.getElementById("contact").value;
 
         var upperCasePattern = /[A-Z]/;        
         var lowerCasePattern = /[a-z]/;        
         var numberPattern = /[0-9]/;           
         var specialCharPattern = /[!@#$%^&*(),.?":{}|<>]/;  
         
+        if (upperCasePattern.test(contact) || lowerCasePattern.test(contact) || specialCharPattern.test(contact)){
+          event.preventDefault();  
+          alert("Contact should have only numbers."); 
+        }
+        
+
         if (password !== confirmPassword) {
           event.preventDefault();  
           alert("Passwords do not match.");  

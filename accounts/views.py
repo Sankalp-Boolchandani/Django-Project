@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import *
 from django.contrib import messages
+from django.contrib.auth.hashers import make_password
 
 # Create your views here.
 
@@ -15,6 +16,7 @@ def register_user(request):
     contact=data.get('contact')
     email=data.get('email')
     password=data.get('password')
+    password=make_password(password, None, hasher='default')
 
     user=Employee.objects.filter(email=email)
     if user.exists():

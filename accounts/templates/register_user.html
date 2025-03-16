@@ -15,6 +15,7 @@
     {% for message in messages %}
     <div class="alert alert-primary" role="alert">
       {{ message }}
+      {% comment %} alert {% if message.level == 10 %}alert-success{% elif message.level == 40 %}alert-danger{% elif message.level == 20 %}alert-info{% elif message.level == 30 %}alert-warning{% endif %} {% endcomment %}
     </div>
     {% endfor %}
     {% endif %}
@@ -22,11 +23,11 @@
       {% csrf_token %}
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">First Name</label>
-        <input type="text" class="form-control" name="first_name" required>
+        <input type="text" class="form-control" name="first_name" id="first_name" required>
       </div>
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Last Name</label>
-        <input type="text" class="form-control" name="last_name" required>
+        <input type="text" class="form-control" name="last_name" id="last_name" required>
       </div>
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Contact No</label>
@@ -53,6 +54,13 @@
         var password = document.getElementById("password").value;
         var confirmPassword = document.getElementById("confirm_password").value;
         var contact = document.getElementById("contact").value;
+        var firstName = document.getElementById("first_name").value.trim();
+        var lastName = document.getElementById("last_name").value.trim();
+
+        if (firstName === "" || lastName === "") {
+          alert("First Name and Last Name cannot be empty or consist only of spaces.");
+          event.preventDefault();
+        }
 
         var upperCasePattern = /[A-Z]/;        
         var lowerCasePattern = /[a-z]/;        
